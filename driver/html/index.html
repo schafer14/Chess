@@ -4,12 +4,29 @@
 	<title>Chess</title>
 	<script src="../../vendors/angular.min.js"></script>
 	<script src="../js/board.js"></script>
+	<script src="../js/piece.js"></script>
+	<link rel="stylesheet" type="stylesheet" href="../css/board.css">
 </head>
 <body>
 
-	<div id="board" ng-controller="BoardCtrl">
-		
-	</div>
+	<table id="board" class="table" ng-controller="BoardCtrl">
+		<tbody>
+			<tr ng-repeat="row in rows">
+				<td ng-repeat="column in columns" class="square">
+					<div class="square {{squares[$parent.$index][$index].color}}" 
+						ng-click="action($parent.$index, $index)"
+						ng-class="{blue:selected == squares[$parent.$index][$index]}">
+						<span ng-bind="squares[$parent.$index][$index].piece.img"
+							ng-class="squares[$parent.$index][$index].piece.color">	
+						</span>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 </body>
+<footer>
+	&copy Banner B. Schafer 2013
+</footer>
 </html>
