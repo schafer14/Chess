@@ -5,6 +5,14 @@
 	<script src="../../vendors/angular.min.js"></script>
 	<script src="../js/board.js"></script>
 	<script src="../js/piece.js"></script>
+	<script src="../js/player.js"></script>
+	<script src="../js/square.js"></script>
+	<script src="../js/pieces/king.js"></script>
+	<script src="../js/pieces/queen.js"></script>
+	<script src="../js/pieces/rook.js"></script>
+	<script src="../js/pieces/bishop.js"></script>
+	<script src="../js/pieces/knight.js"></script>
+	<script src="../js/pieces/pawn.js"></script>
 	<link rel="stylesheet" type="stylesheet" href="../css/board.css">
 </head>
 <body>
@@ -17,7 +25,7 @@
 						ng-click="action($parent.$index, $index)"
 						ng-class="{blue:selected == squares[$parent.$index][$index]}">
 						<span ng-bind="squares[$parent.$index][$index].piece.img"
-							ng-class="squares[$parent.$index][$index].piece.color">	
+							ng-class="squares[$parent.$index][$index].piece.player.color" >
 						</span>
 					</div>
 				</td>
@@ -25,8 +33,11 @@
 		</tbody>
 	</table>
 
+
+
 </body>
 <footer>
 	&copy Banner B. Schafer 2013
 </footer>
 </html>
+
