@@ -2,5 +2,4 @@ Chess
 =====
 
 
-Soon to be available at chess.bannerbschafer.com
-test
+Soon to be available at purplechess.us
