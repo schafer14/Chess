@@ -36,7 +36,6 @@ Piece.prototype.straight = function(square1, square2) {
 		max = square1.row > square2.row ? square1 : square2;
 		min = square1.row < square2.row ? square1 : square2;
 		for (i = min.row + 1; i < max.row; i += 1) {
-			console.log(square1.col, i)
 			if(this.scope.squares[square1.col][i].piece) {
 				return false;
 			}

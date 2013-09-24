@@ -4,10 +4,10 @@ function BoardCtrl($scope) {
 	$scope.rows = [8, 7, 6, 5, 4, 3, 2, 1];
 
 	$scope.black="green";
-	$scope.white="white";
+	$scope.white="gray";
 
-	$scope.player1 = new Player('Banner', 'grayPi', 'human');
-	$scope.player2 = new Player('Asher', 'blackPi', 'human');
+	$scope.player1 = new Player('Banner', 'white', 'human');
+	$scope.player2 = new Player('Asher', 'black', 'human');
 
 	$scope.turn = $scope.player1.color == 'white' ? $scope.player1 : $scope.player2
 
@@ -24,14 +24,14 @@ function BoardCtrl($scope) {
 		});
 	});
 
-	$scope.pieces.push(new King($scope.squares[0][4], $scope.player2, $scope));
-	$scope.pieces.push(new King($scope.squares[7][4], $scope.player1, $scope)); 
+	$scope.pieces.push(new King($scope.squares[0][4], $scope.player2, $scope, false));
+	$scope.pieces.push(new King($scope.squares[7][4], $scope.player1, $scope, false)); 
 	$scope.pieces.push(new Queen($scope.squares[0][3], $scope.player2, $scope));
 	$scope.pieces.push(new Queen($scope.squares[7][3], $scope.player1, $scope));
-	$scope.pieces.push(new Rook($scope.squares[7][0], $scope.player1, $scope));
-	$scope.pieces.push(new Rook($scope.squares[7][7], $scope.player1, $scope));
-	$scope.pieces.push(new Rook($scope.squares[0][7], $scope.player2, $scope));
-	$scope.pieces.push(new Rook($scope.squares[0][0], $scope.player2, $scope));
+	$scope.pieces.push(new Rook($scope.squares[7][0], $scope.player1, $scope, false));
+	$scope.pieces.push(new Rook($scope.squares[7][7], $scope.player1, $scope, false));
+	$scope.pieces.push(new Rook($scope.squares[0][7], $scope.player2, $scope, false));
+	$scope.pieces.push(new Rook($scope.squares[0][0], $scope.player2, $scope, false));
 	$scope.pieces.push(new Bishop($scope.squares[7][2], $scope.player1, $scope));
 	$scope.pieces.push(new Bishop($scope.squares[7][5], $scope.player1, $scope));
 	$scope.pieces.push(new Bishop($scope.squares[0][2], $scope.player2, $scope));
@@ -42,8 +42,8 @@ function BoardCtrl($scope) {
 	$scope.pieces.push(new Knight($scope.squares[7][6], $scope.player1, $scope));
 	
 	for (var tColumn = 0; tColumn <= 7; tColumn += 1) {
-		$scope.pieces.push(new Pawn($scope.squares[6][tColumn], $scope.player1, $scope));
-		$scope.pieces.push(new Pawn($scope.squares[1][tColumn], $scope.player2, $scope));
+		$scope.pieces.push(new Pawn($scope.squares[6][tColumn], $scope.player1, $scope, false));
+		$scope.pieces.push(new Pawn($scope.squares[1][tColumn], $scope.player2, $scope, false));
 	};
 
 	angular.forEach($scope.pieces, function(piece)
@@ -80,7 +80,4 @@ function BoardCtrl($scope) {
 
 		return result;
 	}
-
-
-
 }

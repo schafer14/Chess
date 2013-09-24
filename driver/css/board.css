@@ -11,23 +11,23 @@
 }
 
 .black {
-	background-color: black;
+	color: black;
 }
 
 .white {
-	background-color: white;
+	color: white;
 }
 
 .green {
 	background-color: green;
 }
 
-.blue {
-	background-color: blue;
+.gray {
+	background-color: #FFD98C;
 }
 
-.gray {
-	background-color: #404040;
+.blue {
+	background-color: blue;
 }
 
 .blackPi {
