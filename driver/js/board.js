@@ -24,26 +24,26 @@ function BoardCtrl($scope) {
 		});
 	});
 
-	$scope.pieces.push(new King($scope.squares[0][4], $scope.player2));
-	$scope.pieces.push(new King($scope.squares[7][4], $scope.player1)); 
-	$scope.pieces.push(new Queen($scope.squares[0][3], $scope.player2));
-	$scope.pieces.push(new Queen($scope.squares[7][3], $scope.player1));
-	$scope.pieces.push(new Rook($scope.squares[7][0], $scope.player1));
-	$scope.pieces.push(new Rook($scope.squares[7][7], $scope.player1));
-	$scope.pieces.push(new Rook($scope.squares[0][7], $scope.player2));
-	$scope.pieces.push(new Rook($scope.squares[0][0], $scope.player2));
-	$scope.pieces.push(new Bishop($scope.squares[7][2], $scope.player1));
-	$scope.pieces.push(new Bishop($scope.squares[7][5], $scope.player1));
-	$scope.pieces.push(new Bishop($scope.squares[0][2], $scope.player2));
-	$scope.pieces.push(new Bishop($scope.squares[0][5], $scope.player2));
-	$scope.pieces.push(new Knight($scope.squares[0][1], $scope.player2));
-	$scope.pieces.push(new Knight($scope.squares[0][6], $scope.player2));
-	$scope.pieces.push(new Knight($scope.squares[7][1], $scope.player1));
-	$scope.pieces.push(new Knight($scope.squares[7][6], $scope.player1));
+	$scope.pieces.push(new King($scope.squares[0][4], $scope.player2, $scope));
+	$scope.pieces.push(new King($scope.squares[7][4], $scope.player1, $scope)); 
+	$scope.pieces.push(new Queen($scope.squares[0][3], $scope.player2, $scope));
+	$scope.pieces.push(new Queen($scope.squares[7][3], $scope.player1, $scope));
+	$scope.pieces.push(new Rook($scope.squares[7][0], $scope.player1, $scope));
+	$scope.pieces.push(new Rook($scope.squares[7][7], $scope.player1, $scope));
+	$scope.pieces.push(new Rook($scope.squares[0][7], $scope.player2, $scope));
+	$scope.pieces.push(new Rook($scope.squares[0][0], $scope.player2, $scope));
+	$scope.pieces.push(new Bishop($scope.squares[7][2], $scope.player1, $scope));
+	$scope.pieces.push(new Bishop($scope.squares[7][5], $scope.player1, $scope));
+	$scope.pieces.push(new Bishop($scope.squares[0][2], $scope.player2, $scope));
+	$scope.pieces.push(new Bishop($scope.squares[0][5], $scope.player2, $scope));
+	$scope.pieces.push(new Knight($scope.squares[0][1], $scope.player2, $scope));
+	$scope.pieces.push(new Knight($scope.squares[0][6], $scope.player2, $scope));
+	$scope.pieces.push(new Knight($scope.squares[7][1], $scope.player1, $scope));
+	$scope.pieces.push(new Knight($scope.squares[7][6], $scope.player1, $scope));
 	
 	for (var tColumn = 0; tColumn <= 7; tColumn += 1) {
-		$scope.pieces.push(new Pawn($scope.squares[6][tColumn], $scope.player1));
-		$scope.pieces.push(new Pawn($scope.squares[1][tColumn], $scope.player2));
+		$scope.pieces.push(new Pawn($scope.squares[6][tColumn], $scope.player1, $scope));
+		$scope.pieces.push(new Pawn($scope.squares[1][tColumn], $scope.player2, $scope));
 	};
 
 	angular.forEach($scope.pieces, function(piece)
@@ -67,9 +67,20 @@ function BoardCtrl($scope) {
 				$scope.selected = $scope.squares[col][row];
 			}
 		}
-
-
 	}
+
+	$scope.checkSquares = function(squares) {
+		var result = true;
+		angular.forEach(squares, function(square) {
+			if ($scope.squares[square.col][square.row].piece) {
+				result = false;
+				return false;
+			}
+		});
+
+		return result;
+	}
+
 
 
 }

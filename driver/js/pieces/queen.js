@@ -1,11 +1,11 @@
-function Queen(square, player) {
-	Piece.apply(this, [square, player, 'Queen']);
+function Queen(square, player, scope) {
+	Piece.apply(this, [square, player, 'Queen', scope]);
 }
 
 Queen.prototype = Object.create(Piece.prototype);
 Queen.prototype.constructor = Queen;
 
-Queen.prototype.isValidAction = function() {
-	return true;
+Queen.prototype.isValidAction = function(square) {
+	return this.straight(square, this.square) || this.diagonal(square, this.square);
 }
 
