@@ -22,6 +22,12 @@ Piece.prototype.move = function(square) {
 	}
 }
 
+Piece.prototype.expressMove = function(square) {
+	this.square.piece = false;
+	this.square = square;
+	square.piece = this;
+}
+
 Piece.prototype.remove = function() {
 	this = null;
 }
