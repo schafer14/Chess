@@ -19,9 +19,12 @@ Piece.prototype.move = function(square) {
 		return;
 	}
 
+
 	if(this.scope.turn == this.player) {
 		if (this.isValidMove(square)) {
-			console.log('here');
+			if(this.player.inCheck()) {
+				return;
+			}
 			this.square.piece = false;
 			this.square = square;
 			square.piece = this;

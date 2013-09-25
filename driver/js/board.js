@@ -6,8 +6,8 @@ function BoardCtrl($scope) {
 	$scope.black="green";
 	$scope.white="gray";
 
-	$scope.player1 = new Player('Banner', 'white', 'local');
-	$scope.player2 = new Player('Asher', 'black', 'local');
+	$scope.player1 = new Player('Banner', 'white', 'local', $scope);
+	$scope.player2 = new Player('Asher', 'black', 'local', $scope);
 
 	$scope.turn = $scope.player1.color == 'white' ? $scope.player1 : $scope.player2
 
@@ -50,6 +50,8 @@ function BoardCtrl($scope) {
 	{
 		piece.square.piece = piece;
 	});
+
+	console.log($scope);
 
 	$scope.action = function(col, row) {
 		if ($scope.selected) {
