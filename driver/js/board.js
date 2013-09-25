@@ -51,9 +51,6 @@ function BoardCtrl($scope) {
 		piece.square.piece = piece;
 	});
 
-
-	console.log($scope)
-
 	$scope.action = function(col, row) {
 		if ($scope.selected) {
 			if ($scope.selected == $scope.squares[col][row]) {

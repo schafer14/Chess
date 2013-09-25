@@ -22,11 +22,13 @@ Pawn.prototype.isValidAction = function(square) {
 		this.square.col == operator[direction](square.col, 1)
 		) {
 		if (square.piece) {
+			this.promotion(square, end);
 			return true;
 		} else {
 			var p = this.scope.squares[this.square.col][square.row].piece;
 			if (p.enPassent == true) {
 				p.square.piece = false;
+				this.promotion(square, end);
 				return true;
 			}
 		}
@@ -35,10 +37,12 @@ Pawn.prototype.isValidAction = function(square) {
 	//moving forward 
 	if (this.square.row == square.row && !square.piece) {
 		if(this.square.col == operator[direction](square.col, 1)) {
+			this.promotion(square, end);			
 			return true;
 		}
 		if(this.square.col == operator[direction](square.col, 2) && this.square.col == start) {
 			this.enPassent = true;
+			this.promotion(square, end);
 			return true;
 		}
 	}
@@ -46,3 +50,13 @@ Pawn.prototype.isValidAction = function(square) {
 	return false;
 }
 
+Pawn.prototype.promotion = function(square, end) {
+	if(square.col == end) {
+		this.square.piece = false;
+		this.scope.pieces.pop(this);
+		q = new Queen(square, this.player, this.scope);
+		this.scope.pieces.push(q);
+		q.square.piece = q;
+		this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
+	}
+}

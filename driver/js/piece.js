@@ -21,11 +21,15 @@ Piece.prototype.move = function(square) {
 
 	if(this.scope.turn == this.player) {
 		if (this.isValidMove(square)) {
+			console.log('here');
 			this.square.piece = false;
 			this.square = square;
 			square.piece = this;
+			if (square.piece) {
+				square.piece.remove();
+			}
+			this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
 		}
-		this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
 	}
 }
 
@@ -36,7 +40,7 @@ Piece.prototype.expressMove = function(square) {
 }
 
 Piece.prototype.remove = function() {
-	this = null;
+	this.scope.pieces.pop(this);
 }
 
 Piece.prototype.isValidAction = function(square) {
