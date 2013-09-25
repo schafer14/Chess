@@ -15,10 +15,17 @@ Piece.prototype.notOwnPiece = function(square) {
 }
 
 Piece.prototype.move = function(square) {
-	if (this.isValidMove(square)) {
-		this.square.piece = false;
-		this.square = square;
-		square.piece = this;
+	if(this.player.type != 'local') {
+		return;
+	}
+
+	if(this.scope.turn == this.player) {
+		if (this.isValidMove(square)) {
+			this.square.piece = false;
+			this.square = square;
+			square.piece = this;
+		}
+		this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
 	}
 }
 

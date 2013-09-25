@@ -6,8 +6,8 @@ function BoardCtrl($scope) {
 	$scope.black="green";
 	$scope.white="gray";
 
-	$scope.player1 = new Player('Banner', 'white', 'human');
-	$scope.player2 = new Player('Asher', 'black', 'human');
+	$scope.player1 = new Player('Banner', 'white', 'local');
+	$scope.player2 = new Player('Asher', 'black', 'local');
 
 	$scope.turn = $scope.player1.color == 'white' ? $scope.player1 : $scope.player2
 
