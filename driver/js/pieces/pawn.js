@@ -19,17 +19,22 @@ Pawn.prototype.isValidAction = function(square) {
 	if((
 		this.square.row == square.row + 1 ||
 		this.square.row == square.row - 1) &&
-		this.square.col == operator[direction](square.col, 1) &&
-		square.piece
+		this.square.col == operator[direction](square.col, 1)
 		) {
-		this.enPassent = false;
-		return true;
+		if (square.piece) {
+			return true;
+		} else {
+			var p = this.scope.squares[this.square.col][square.row].piece;
+			if (p.enPassent == true) {
+				p.square.piece = false;
+				return true;
+			}
+		}
 	} 
 
 	//moving forward 
 	if (this.square.row == square.row && !square.piece) {
 		if(this.square.col == operator[direction](square.col, 1)) {
-			this.enPassent = false;
 			return true;
 		}
 		if(this.square.col == operator[direction](square.col, 2) && this.square.col == start) {

@@ -7,6 +7,12 @@ King.prototype.constructor = King;
 
 
 King.prototype.isValidAction = function(square) {
-	return true;
+	if((square.col == this.square.col + 1 || square.col == this.square.col - 1 || square.col == this.square.col) &&
+		(square.row == this.square.row + 1 || square.row == this.square.row - 1 || square.row == this.square.row)) {
+		return true;
+	}
+
+	//CASTLING
+	return false;
 }
 
