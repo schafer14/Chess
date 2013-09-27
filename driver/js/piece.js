@@ -19,7 +19,6 @@ Piece.prototype.move = function(square) {
 		return;
 	}
 
-
 	if(this.scope.turn == this.player) {
 		if (this.isValidMove(square)) {
 			if(this.player.inCheck()) {
@@ -32,6 +31,8 @@ Piece.prototype.move = function(square) {
 				square.piece.remove();
 			}
 			this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
+			var opponent = this.scope.turn == this.scope.player1 ? this.scope.player1 : this.scope.player2;
+			opponent.checkmate();
 		}
 	}
 }

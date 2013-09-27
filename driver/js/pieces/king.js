@@ -42,3 +42,59 @@ King.prototype.isValidAction = function(square) {
 	return false;
 }
 
+King.prototype.run = function() {
+	var squares = [];
+	var curr = this.square;
+	var safe = false;
+	var col, row;
+	var scope = this.scope;
+	var player = this.player;
+
+	if(curr.col + 1 > 7) {
+		col = [0, -1];
+	} else if(curr.col - 1 < 0) {
+		col = [1, 0];
+	} else {
+		col = [1, 0, -1];
+	}
+
+	if(curr.row + 1 > 7) {
+		row = [0, -1];
+	} else if(curr.row - 1 < 0) {
+		row = [1, 0];
+	} else {
+		row = [1, 0, -1];
+	}
+
+	angular.forEach(col, function(c) {
+		angular.forEach(row, function(r) {
+			squares.push(scope.squares[curr.col + c][curr.row + r]);
+		});
+	});
+
+	angular.forEach(squares, function(o) {
+		var safeSquare = true;
+		if(o.col > 7 || o.row > 7 || o.col < 0 || o.row < 0) {
+			squares.pop(o);
+			return;
+		}
+		if (o.piece.player == player) {
+			squares.pop(o);
+			return;
+		}
+
+		angular.forEach(scope.pieces, function(piece) {
+			if(piece.isValidAction(o) &&  (piece.player != player)) {
+				safeSquare = false;
+				return;
+			}
+		})
+		
+		if(safeSquare) {
+			console.log(o);
+			safe = true;
+		}
+	});
+
+	return safe;
+}
