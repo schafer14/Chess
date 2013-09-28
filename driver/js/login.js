@@ -1,4 +1,4 @@
-function LoginCtrl($scope) {
+function LoginCtrl($scope, User) {
 
 	$scope.var = {};
 
@@ -9,13 +9,15 @@ function LoginCtrl($scope) {
 		$('#loginModal').modal('show');
 	}	
 
-
-
 	$scope.guest = function() {
+		// User.post({
 
+		// }, function(data) {
+		// 	console.log(data);
+		// });
 	}
 
-	$scope.login = function() {
+	$scope.register = function() {
 
 	}
 }
