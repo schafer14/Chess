@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<title>Purple Chess</title>
+    <link rel="stylesheet" type="text/css" href="../../vendors/bootstrap/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../vendors/bootstrap/css/bootstrap-theme.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/purple.css"></link>
+</head>
+<body ng-controller="LoginCtrl">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Purple Chess</a>
+        </div>
+    </nav>
+
+    <h1 class="h-center purple">PurpleChess</h1><br>
+    
+    <div class="row">
+        <div class="col-md-4 well" ng-click="loginModal()">
+            <h3 class="h-center">Login</h3>
+        </div>
+        <div class="col-md-4 well" ng-click="registerModal()">
+            <h3 class="h-center">Register</h3>
+        </div>
+        <div class="col-md-4 well" ng-click="guest()">
+            <h3 class="h-center">Guest</h3>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal fade" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="login()">Login</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- END LOGIN MODAL -->
+
+    <!-- REGISTER MODAL -->
+    <div class="modal fade" id="registerModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Register</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input type="email" class="form-control" id="userName" placeholder="User name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword2">Password Confirmation</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Register</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- END REGISTER MODAL -->
+
+</body>
+<hr>
+<footer class="footer h-center">
+    <p>&copy Banner B. Schafer 2013</p>
+</footer>
+
+<script src="../../vendors/angular.min.js"></script>
+<script src="../../vendors/jquery.min.js"></script>
+<script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+<script src="../js/login.js"></script>
+
+</html>
