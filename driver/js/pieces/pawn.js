@@ -5,7 +5,7 @@ function Pawn(square, player, scope, hasMoved, enPassent) {
 Pawn.prototype = Object.create(Piece.prototype);
 Pawn.prototype.constructor = Pawn;
 
-Pawn.prototype.isValidAction = function(square) {
+Pawn.prototype.isValidAction = function(square, move) {
 	var operator = {
 		'+': function(a,b) { return a + b },
 		'-': function(a,b) { return a - b },
@@ -27,7 +27,7 @@ Pawn.prototype.isValidAction = function(square) {
 		} else {
 			var p = this.scope.squares[this.square.col][square.row].piece;
 			if (p.enPassent == true) {
-				p.square.piece = false;
+				p.remove(move);
 				this.promotion(square, end);
 				return true;
 			}

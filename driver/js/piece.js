@@ -15,26 +15,40 @@ Piece.prototype.notOwnPiece = function(square) {
 }
 
 Piece.prototype.move = function(square) {
+	var move = {
+		origin: this.square,
+		dest: square,
+		piece: this
+	};
 	if(this.player.type != 'local') {
 		return;
 	}
 
 	if(this.scope.turn == this.player) {
-		if (this.isValidMove(square)) {
-			if(this.player.inCheck()) {
-				return;
+		if (this.isValidAction(square, move)) {
+			if (square.piece) {
+				square.piece.remove(move);
 			}
 			this.square.piece = false;
 			this.square = square;
 			square.piece = this;
-			if (square.piece) {
-				square.piece.remove();
+			if(this.player.inCheck()) {
+				move.origin.piece = move.piece;
+				move.piece.square = move.origin;
+				move.dest.piece = false;
+				if (move.capSquare) {
+					move.capSquare.piece = move.capPiece;
+					this.scope.pieces.push(move.capPiece);
+				}
+				return;
+			} else {
+				this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
+				var opponent = this.scope.turn == this.scope.player1 ? this.scope.player1 : this.scope.player2;
+				opponent.checkmate();
 			}
-			this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
-			var opponent = this.scope.turn == this.scope.player1 ? this.scope.player1 : this.scope.player2;
-			opponent.checkmate();
 		}
 	}
+	move = {};
 }
 
 Piece.prototype.expressMove = function(square) {
@@ -43,11 +57,14 @@ Piece.prototype.expressMove = function(square) {
 	square.piece = this;
 }
 
-Piece.prototype.remove = function() {
+Piece.prototype.remove = function(move) {
+	console.log(move);
+	move.capPiece = this;
+	move.capSquare = this.square;
 	this.scope.pieces.pop(this);
 }
 
-Piece.prototype.isValidAction = function(square) {
+Piece.prototype.isValidAction = function(square, move) {
 	return false;
 }
 
