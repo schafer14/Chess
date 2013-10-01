@@ -1,6 +1,9 @@
-function LoginCtrl($scope, User) {
+function LoginCtrl($scope, User, Auth) {
 
-	$scope.var = {};
+
+	Auth.check({}, function(data) {
+		console.log(data);
+	});
 
 	$scope.registerModal = function() {
 		$('#registerModal').modal('show');
@@ -10,14 +13,30 @@ function LoginCtrl($scope, User) {
 	}	
 
 	$scope.guest = function() {
-		// User.post({
-
-		// }, function(data) {
-		// 	console.log(data);
-		// });
+		User.post({
+			'type': 'guest'
+		}, function(data){
+			$('#registerModal').modal('hide');
+		});
 	}
 
 	$scope.register = function() {
-
+		User.post({
+			'name': $scope.user.name,
+			'email': $scope.user.email,
+			'password': $scope.user.password,
+		}, function(data){
+			$('#registerModal').modal('hide');
+		});
+	}
+	
+	$scope.login = function() {
+		Auth.login({
+			'email': $scope.login.email,
+			'password': $scope.login.password
+		}, function(data) {
+			console.log(data);
+			$('#loginModal').modal('hide');
+		});
 	}
 }
