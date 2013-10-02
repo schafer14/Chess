@@ -3,6 +3,10 @@ var Config = {
 	api: 'http://api.purplechess.dev/',
 };
 
+chess.config(function($httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
+});
+
 chess.factory('User', function($resource) {
 	return $resource(Config.api + 'user/:id', { id: '@id' },
 		{
