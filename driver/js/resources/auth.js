@@ -4,7 +4,7 @@ var Config = {
 };
 
 chess.config(function($httpProvider) {
-  $httpProvider.defaults.withCredentials = true;
+	$httpProvider.defaults.withCredentials = true; 
 });
 
 chess.factory('User', function($resource) {
