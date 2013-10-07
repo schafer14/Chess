@@ -11,11 +11,18 @@
     <nav class="navbar navbar-inverse" role="navigation">
    		<div class="collapse navbar-collapse navbar-ex1-collapse">
 	        <a class="navbar-brand" href="/">Purple Chess</a>
-	        <a class="navbar-brand navbar-right" ng-show="me">Logout ({{me.info.name}})</a>
+	        <a class="navbar-brand navbar-right" ng-show="me" ng-click="logout()">Logout ({{me.info.name}})</a>
 	    </div>
 	</nav>
 
 	<h1 class="h-center purple">PurpleChess</h1><br>
+
+	<div class="alert alert-info col-md-10 col-md-offset-1" ng-show="challenge">
+		<p class="h-center">You have recieved a challenge from {{challenge.opp}} for a {{challenge.time}} game.<br>
+			<button class="btn btn-primary" ng-click="accept()">Accept</button>
+			<button class="btn btn-danger" ng-click="decline()">Decline</button>
+		</p>
+	</div>
     
 
 	<div class="row" ng-show="!me">
@@ -61,9 +68,9 @@
 			<h4 class="h-center"><strong>Blitz:</strong> <span ng-bind="highlight.rating.blitz"></span></h4>
 			<h4 class="h-center"><strong>Slow:</strong> <span ng-bind="highlight.rating.slow"></span></h4>
 			<p class="h-center" ng-show="highlight != me.info">
-				<button class="btn btn-success">Challenge Bullet</button>
-				<button class="btn btn-info">Challenge Blitz</button>
-				<button class="btn btn-warning">Challenge Slow</button>
+				<button class="btn btn-success" ng-click="propose('bullet')">Challenge Bullet</button>
+				<button class="btn btn-info" ng-click="propose('blitz')">Challenge Blitz</button>
+				<button class="btn btn-warning" ng-click="propose('slow')">Challenge Slow</button>
 			</p>
 		</div>
 

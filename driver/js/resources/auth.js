@@ -20,7 +20,24 @@ chess.factory('Auth', function($resource) {
 	return $resource(Config.api + 'auth/:id', { id: '@id' },
 		{
 			check: { method: 'GET' },
-			login: { method: 'POST' }
+			login: { method: 'POST' },
+			logout: { method: 'PUT' }
+		}
+	);
+});
+
+chess.factory('Logout', function($resource) {
+	return $resource(Config.api + 'logout', {},
+		{
+			logout: { method: 'GET' }
+		}
+	);
+});
+
+chess.factory('Prop', function($resource) {
+	return $resource(Config.api + 'pusher/prop', {},
+		{
+			prop: { method: 'POST' }
 		}
 	);
 });
