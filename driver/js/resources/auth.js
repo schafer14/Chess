@@ -37,8 +37,19 @@ chess.factory('Logout', function($resource) {
 chess.factory('Prop', function($resource) {
 	return $resource(Config.api + 'pusher/prop', {},
 		{
-			prop: { method: 'POST' }
+			prop: { method: 'POST' },
+			accept: { method: 'PUT' }
 		}
 	);
 });
+
+
+chess.factory('GameConfig', function($resource) {
+	return $resource(Config.api + 'game-config', {},
+		{
+			get: { method: 'GET' }
+		}
+	);
+});
+
 

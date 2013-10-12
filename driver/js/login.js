@@ -1,6 +1,10 @@
 function LoginCtrl($scope, User, Auth, Logout, Prop, $http) {
 
+	$scope.config = {
+		game: 'game.html'
+	};
 	$scope.pusher = {};
+	$scope.channels = {};
 	Pusher.channel_auth_endpoint = 'http://api.purplechess.dev/pusher';
 	var pusher = new Pusher('82495e54704164d896ff');
 
@@ -77,23 +81,26 @@ function LoginCtrl($scope, User, Auth, Logout, Prop, $http) {
 	}
 
 	$scope.setupChannel = function(time) {
-		var propChannel = pusher.subscribe('private-' + $scope.me.id);
-		propChannel.bind('pusher:subscription_succeeded', function() {
+		$scope.channels.propChannel = pusher.subscribe('private-' + $scope.me.id);
+		$scope.channels.propChannel.bind('pusher:subscription_succeeded', function() {
 		});
-		propChannel.bind('prop', function(data) {
+		$scope.channels.propChannel.bind('prop', function(data) {
 			if (!$scope.challenge) {
 				$scope.$apply($scope.challenge = data);
 			}
 		});
+		$scope.channels.propChannel.bind('game', function(data) {
+			console.log(data);
+			location.replace($scope.config.game + '?game_id=' + data.id);
+		});
 	}
 
 	$scope.propose = function(time) {
-		console.log($scope.highlight.rating.user_id)
 		Prop.prop({
 			opp: $scope.highlight.rating.user_id,
 			time: time
 		}, function(data) {
-			console.log(data);
+			
 		});
 	}
 
@@ -102,6 +109,16 @@ function LoginCtrl($scope, User, Auth, Logout, Prop, $http) {
 	}
 
 	$scope.accept = function() {
-		console.log(accept);
+		Prop.accept({
+			opp: $scope.challenge.opp_id,
+			time: $scope.challenge.time
+		}, function(data) {
+			console.log(data.id);
+			delete $scope.challenge;
+			location.replace($scope.config.game + '?game_id=' + data.id);
+		});
 	}
+
+	
+
 }

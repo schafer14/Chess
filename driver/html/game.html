@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="game">
 <head>
 	<title>Chess</title>
+	<script src="../../vendors/pusher.js"></script>
 	<script src="../../vendors/angular.min.js"></script>
+	<script src="../../vendors/angular-resource.min.js"></script>
+	<script src="../js/resources/game.js"></script>
 	<script src="../js/board.js"></script>
 	<script src="../js/piece.js"></script>
 	<script src="../js/player.js"></script>
@@ -16,22 +19,23 @@
 	<link rel="stylesheet" type="stylesheet" href="../css/board.css">
 </head>
 <body>
-
+	<h1 ng-bind="opp.name"></h1>
 	<table id="board" class="table" ng-controller="BoardCtrl">
 		<tbody>
 			<tr ng-repeat="row in rows">
 				<td ng-repeat="column in columns" class="square">
-					<div class="square {{squares[$parent.$index][$index].color}}" 
-						ng-click="action($parent.$index, $index)"
-						ng-class="{blue:selected == squares[$parent.$index][$index]}">
-						<span ng-bind="squares[$parent.$index][$index].piece.img"
-							ng-class="squares[$parent.$index][$index].piece.player.color" >
+					<div class="square {{squares[row][column].color}}" 
+						ng-click="action(row, column)"
+						ng-class="{blue:selected == squares[row][column]}">
+						<span ng-bind="squares[row][column].piece.img"
+							ng-class="squares[row][column].piece.player.color" >
 						</span>
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<h1 ng-bind="me.name"></h1>
 
 
 

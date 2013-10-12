@@ -14,13 +14,13 @@ Piece.prototype.notOwnPiece = function(square) {
 	return square.piece.player != this.player;
 }
 
-Piece.prototype.move = function(square) {
+Piece.prototype.move = function(square, type) {
 	var move = {
 		origin: this.square,
 		dest: square,
 		piece: this
 	};
-	if(this.player.type != 'local') {
+	if((this.player.type != type)) {
 		return;
 	}
 
@@ -42,6 +42,12 @@ Piece.prototype.move = function(square) {
 				}
 				return;
 			} else {
+				this.scope.channels.gameChannel.trigger('client-move', {
+					fromCol: move.origin.col,
+					fromRow: move.origin.row,
+					toCol: square.col,
+					toRow: square.row
+				});
 				this.scope.turn = this.scope.turn == this.scope.player1 ? this.scope.player2 : this.scope.player1;
 				var opponent = this.scope.turn == this.scope.player1 ? this.scope.player1 : this.scope.player2;
 				opponent.checkmate();
@@ -58,10 +64,9 @@ Piece.prototype.expressMove = function(square) {
 }
 
 Piece.prototype.remove = function(move) {
-	console.log(move);
 	move.capPiece = this;
 	move.capSquare = this.square;
-	this.scope.pieces.pop(this);
+	delete this.scope.pieces;
 }
 
 Piece.prototype.isValidAction = function(square, move) {
@@ -122,4 +127,3 @@ Piece.prototype.diagonal = function(square1, square2) {
 	return true;
 }
 
-	
